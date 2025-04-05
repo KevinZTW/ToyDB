@@ -7,6 +7,10 @@ set(SOURCE_FILES
         main.cpp
         Field.cpp
         Tuple.h
+        StorageManager.h
+        StorageManager.cpp
+        BTree.cpp
+        BufferManager.h
 )
 
 add_executable(toy_db ${SOURCE_FILES})
@@ -22,8 +26,16 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 file(GLOB TEST_SOURCES "tests/*.cpp")
+set(TEST_DEPENDENCIES
+        Field.cpp
+        Tuple.h
+        StorageManager.h
+        StorageManager.cpp
+        BTree.cpp
+        BufferManager.h
+)
 
-add_executable(toy_db_tests ${TEST_SOURCES})
+add_executable(toy_db_tests ${TEST_SOURCES} ${TEST_DEPENDENCIES})
 target_link_libraries(toy_db_tests GTest::gtest_main)
 
 include(GoogleTest)
