@@ -3,24 +3,10 @@ project(toy_db)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(SOURCE_FILES
-        main.cpp
-        core/Field.cpp
-        core/Tuple.h
-        core/StorageManager.h
-        core/StorageManager.cpp
-        core/BTree.cpp
-        core/BufferManager.h
-)
+file(GLOB CORE_SOURCES "core/*")
 
 add_library(toy_db_core
-        core/Field.cpp
-        core/Tuple.h
-        core/StorageManager.h
-        core/StorageManager.cpp
-        core/BTree.cpp
-        core/BufferManager.h
-        core/Config.h
+        ${CORE_SOURCES}
 )
 
 target_include_directories(toy_db_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
