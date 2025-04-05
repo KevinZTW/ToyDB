@@ -5,15 +5,29 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(SOURCE_FILES
         main.cpp
-        Field.cpp
-        Tuple.h
-        StorageManager.h
-        StorageManager.cpp
-        BTree.cpp
-        BufferManager.h
+        core/Field.cpp
+        core/Tuple.h
+        core/StorageManager.h
+        core/StorageManager.cpp
+        core/BTree.cpp
+        core/BufferManager.h
 )
 
-add_executable(toy_db ${SOURCE_FILES})
+add_library(toy_db_core
+        core/Field.cpp
+        core/Tuple.h
+        core/StorageManager.h
+        core/StorageManager.cpp
+        core/BTree.cpp
+        core/BufferManager.h
+        core/Config.h
+)
+
+target_include_directories(toy_db_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+
+add_executable(toy_db main.cpp)
+target_link_libraries(toy_db toy_db_core)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -26,17 +40,11 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 file(GLOB TEST_SOURCES "tests/*.cpp")
-set(TEST_DEPENDENCIES
-        Field.cpp
-        Tuple.h
-        StorageManager.h
-        StorageManager.cpp
-        BTree.cpp
-        BufferManager.h
+add_executable(toy_db_tests ${TEST_SOURCES})
+target_link_libraries(toy_db_tests
+        toy_db_core
+        GTest::gtest_main
 )
-
-add_executable(toy_db_tests ${TEST_SOURCES} ${TEST_DEPENDENCIES})
-target_link_libraries(toy_db_tests GTest::gtest_main)
 
 include(GoogleTest)
 gtest_discover_tests(toy_db_tests)

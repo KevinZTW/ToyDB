@@ -8,15 +8,23 @@
 #include <fstream>
 #include <filesystem>
 #include <iostream>
+#include "Config.h"
 
 namespace DB {
 class StorageManager {
  public:
   StorageManager(bool truncate_mode = true);
 
+  ~StorageManager();
+
+  void Extend(int to_page_num);
+
+  int GetPageNum();
  private:
-  const std::string database_filename = "toy_db.data";
+  const std::string database_filename = DB_FILE_NAME;
   std::fstream file_stream;
+  int page_num = 0;
+  std::mutex io_mutex;
 };
 }
 
