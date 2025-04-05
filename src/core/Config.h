@@ -8,7 +8,13 @@
 
 #include <cstddef>
 namespace DB {
-inline constexpr size_t PAGE_SIZE = 4096;
+
+inline constexpr int INVALID_PAGE_ID = -1;
+inline constexpr int PAGE_SIZE = 4096;
 inline constexpr const char *DB_FILE_NAME = "toy_db.data";
+
+using PageID = uint32_t;
+using FrameID = uint32_t;
+
 }
 #endif //TOY_DB_SRC_CORE_CONFIG_H_

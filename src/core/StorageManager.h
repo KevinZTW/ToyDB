@@ -9,6 +9,7 @@
 #include <filesystem>
 #include <iostream>
 #include "Config.h"
+#include "Page.h"
 
 namespace DB {
 class StorageManager {
@@ -17,14 +18,19 @@ class StorageManager {
 
   ~StorageManager();
 
-  void Extend(int to_page_num);
+  void ExtendTo(int page_num);
 
-  int GetPageNum();
+  int GetTotalPageNum();
+
+  void ReadPage(PageID page_id, char *page_data);
+  void WritePage(PageID page_id, const char *page_data);
+
  private:
-  const std::string database_filename = DB_FILE_NAME;
-  std::fstream file_stream;
-  int page_num = 0;
-  std::mutex io_mutex;
+  const std::string database_filename_ = DB_FILE_NAME;
+  std::fstream file_stream_;
+  int total_page_num_ = 0;
+  std::mutex io_mutex_;
+
 };
 }
 
