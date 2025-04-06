@@ -2,8 +2,8 @@
 // Created by Kevin Zhang on 2025/2/24.
 //
 #include <gtest/gtest.h>
-#include "core/Config.h"
-#include "core/StorageManager.h"
+#include "common/Config.h"
+#include "storage/StorageManager.h"
 
 TEST(StorageManagerTest, Construction) {
   EXPECT_NO_THROW(DB::StorageManager storage_manager_manager(false));

@@ -8,8 +8,8 @@
 #include <fstream>
 #include <filesystem>
 #include <iostream>
-#include "Config.h"
-#include "Page.h"
+#include "common/Config.h"
+#include "core/Page.h"
 
 namespace DB {
 class StorageManager {

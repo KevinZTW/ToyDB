@@ -7,6 +7,7 @@
 #pragma once
 
 #include <cstddef>
+
 namespace DB {
 
 inline constexpr int INVALID_PAGE_ID = -1;
@@ -16,5 +17,8 @@ inline constexpr const char *DB_FILE_NAME = "toy_db.data";
 using PageID = uint32_t;
 using FrameID = uint32_t;
 
+class Config {
+
+};
 }
 #endif //TOY_DB_SRC_CORE_CONFIG_H_
