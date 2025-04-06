@@ -26,8 +26,8 @@ class BufferManager {
 
     FrameID frame_id;
     PageID page_id = INVALID_PAGE_ID;
-    std::shared_ptr<DB::Page> page = std::make_shared<DB::Page>();
-    bool is_dirty = false;
+    std::shared_ptr<DB::Page> page_ = nullptr;
+    bool is_dirty_ = false;
   };
 
  private:
@@ -56,11 +56,9 @@ class BufferManager {
   BufferManager();
   ~BufferManager();
 
-  std::shared_ptr<DB::Page> FetchPage(int page_id, bool exclusive = false);
+  std::shared_ptr<DB::Page> FetchPage(PageID page_id, bool exclusive = false);
 
-  void UnfixPage(int page_id, bool is_dirty);
-
-  void FlushPage(int page_id);
+  void UnfixPage(PageID page_id, bool is_dirty);
 };
 }
 #endif //TOY_DB_BUFFERMANAGER_H

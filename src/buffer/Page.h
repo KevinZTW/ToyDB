@@ -15,7 +15,6 @@ class Page {
   virtual ~Page() = default;
 
   PageID page_id_ = INVALID_PAGE_ID;
-  bool is_dirty_ = false;
   std::unique_ptr<char[]> data_ = std::make_unique<char[]>(PAGE_SIZE);
 };
 }
