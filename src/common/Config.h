@@ -7,18 +7,17 @@
 #pragma once
 
 #include <cstddef>
+#include "limits"
 
 namespace DB {
 
-inline constexpr int INVALID_PAGE_ID = -1;
+inline constexpr uint32_t INVALID_PAGE_ID = std::numeric_limits<uint32_t>::max();
 inline constexpr int PAGE_SIZE = 4096;
 inline constexpr const char *DB_FILE_NAME = "toy_db.data";
 
+inline constexpr int BUFFER_MANAGER_POOL_SIZE = 1024;
+
 using PageID = uint32_t;
 using FrameID = uint32_t;
-
-class Config {
-
-};
 }
 #endif //TOY_DB_SRC_CORE_CONFIG_H_

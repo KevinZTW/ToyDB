@@ -3,7 +3,7 @@ project(toy_db)
 
 set(CMAKE_CXX_STANDARD 17)
 
-file(GLOB CORE_SOURCES "core/*" "storage/*" "common/*")
+file(GLOB CORE_SOURCES "core/*" "storage/*" "common/*" "buffer/*")
 
 add_library(toy_db_core
         ${CORE_SOURCES}

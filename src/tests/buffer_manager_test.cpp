@@ -2,11 +2,10 @@
 // Created by Kevin Zhang on 2025/2/24.
 //
 #include <gtest/gtest.h>
+#include "buffer/BufferManager.h"
 
-// Demonstrate some basic assertions.
 TEST(BufferManagerTest, Basic) {
-  // Expect two strings not to be equal.
-  EXPECT_STRNE("hello", "world");
-  // Expect equality.
-  EXPECT_EQ(7 * 6, 42);
+  std::unique_ptr<DB::BufferManager> buffer_manager = std::make_unique<DB::BufferManager>();
+
+  buffer_manager->FetchPage(0);
 }

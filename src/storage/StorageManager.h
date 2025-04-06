@@ -9,7 +9,7 @@
 #include <filesystem>
 #include <iostream>
 #include "common/Config.h"
-#include "core/Page.h"
+#include "buffer/Page.h"
 
 namespace DB {
 class StorageManager {
