@@ -5,7 +5,7 @@
 #ifndef TOY_DB_BUFFERMANAGER_H
 #define TOY_DB_BUFFERMANAGER_H
 
-#include "Page.h"
+#include "storage/Page.h"
 #include "common/Config.h"
 #include "storage/StorageManager.h"
 #include "vector"
