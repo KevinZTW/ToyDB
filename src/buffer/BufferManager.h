@@ -5,13 +5,13 @@
 #ifndef TOY_DB_BUFFERMANAGER_H
 #define TOY_DB_BUFFERMANAGER_H
 
-#include "storage/Page.h"
 #include "common/Config.h"
 #include "storage/StorageManager.h"
 #include "vector"
 #include <shared_mutex>
 #include "BufferPolicy.h"
 #include "TwoQBufferPolicy.h"
+#include "SlottedPage.h"
 
 namespace DB {
 enum class PageLockMode { EXCLUSIVE, SHARED };
@@ -26,7 +26,7 @@ class BufferManager {
 
     FrameID frame_id;
     PageID page_id = INVALID_PAGE_ID;
-    std::shared_ptr<DB::Page> page_ = nullptr;
+    std::shared_ptr<DB::SlottedPage> page_ = nullptr;
     bool is_dirty_ = false;
   };
 
@@ -56,7 +56,7 @@ class BufferManager {
   BufferManager();
   ~BufferManager();
 
-  std::shared_ptr<DB::Page> FetchPage(PageID page_id, bool exclusive = false);
+  std::shared_ptr<DB::SlottedPage> FetchPage(PageID page_id, bool exclusive = false);
 
   void UnfixPage(PageID page_id, bool is_dirty);
 };

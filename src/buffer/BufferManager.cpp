@@ -22,7 +22,7 @@ DB::BufferManager::~BufferManager() {
   }
 }
 
-std::shared_ptr<DB::Page> DB::BufferManager::FetchPage(PageID page_id, bool exclusive) {
+std::shared_ptr<DB::SlottedPage> DB::BufferManager::FetchPage(PageID page_id, bool exclusive) {
   // super coarse grained lock... should enhance to fine-grained lock
   main_mx.lock();
 
@@ -87,11 +87,10 @@ std::shared_ptr<DB::Page> DB::BufferManager::FetchPage(PageID page_id, bool excl
   }
 
   // find empty slot
-  // 先用最 naive 的 linear scan
   for (size_t i = 0; i < capacity_; i++) {
     BufferFrame &frame = buffer_frames_[i];
     if (frame.page_ == nullptr) {
-      frame.page_ = std::make_shared<Page>();
+      frame.page_ = std::make_shared<SlottedPage>();
       storage_manager_.ReadPage(page_id, frame.page_->data_.get());
       frame.page_id = page_id;
       page_use_count[page_id]++;
